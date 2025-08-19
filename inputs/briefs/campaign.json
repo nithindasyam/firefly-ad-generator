@@ -1,0 +1,16 @@
+{
+  "campaignName": "Summer Ad Campaign",
+  "products": [
+    {
+      "name": "productA",
+      "description": "A refreshing summer drink."
+    },
+    {
+      "name": "productB",
+      "description": "Stylish sunglasses for the summer."
+    }
+  ],
+  "targetRegion": "US",
+  "targetAudience": "Gen Z",
+  "campaignMessage": "Get ready for summer!"
+}

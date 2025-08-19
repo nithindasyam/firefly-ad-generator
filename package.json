@@ -1,0 +1,25 @@
+{
+  "name": "firefly-ad-generator",
+  "version": "1.0.0",
+  "description": "Automated creative asset generation for social ad campaigns using GenAI.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "form-data": "^4.0.0",
+    "i18next": "^23.2.11",
+    "js-yaml": "^4.1.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  }
+}
