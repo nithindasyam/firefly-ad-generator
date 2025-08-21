@@ -234,9 +234,9 @@ The prompt generator includes optimized styles for:
 
 ### Supported Aspect Ratios
 Configured in `src/config/index.js`:
-- `1:1` (1024×1024) - Square/Instagram feed
-- `9:16` (960×1708) - Vertical/Instagram Stories
-- `16:9` (1708×960) - Horizontal/YouTube thumbnails
+- `1:1` (2048×2048) - Square/Instagram feed
+- `9:7` (2304×1792) - Vertical/Instagram Stories
+- `16:9` (2688×1512) - Horizontal/YouTube thumbnails
 - Additional ratios: `4:3`, `3:4`, `3:2`, `2:3`
 
 ### Error Handling & Resilience

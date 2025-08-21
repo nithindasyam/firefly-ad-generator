@@ -174,9 +174,9 @@ const generateImage = async (prompt, aspectRatio, accessToken, styleImageId = nu
   try {
     validateImageParams(prompt, aspectRatio, accessToken, styleImageId);
     const sizeMap = {
-      '1:1': { width: 1024, height: 1024 },
-      '9:16': { width: 960, height: 1708 },
-      '16:9': { width: 1708, height: 960 },
+      '1:1': { width: 2048, height: 2048 },
+      '9:7': { width: 2304, height: 1792 },
+      '16:9': { width: 2688, height: 1512 },
       '4:3': { width: 1152, height: 896 },
       '3:4': { width: 896, height: 1152 },
       '3:2': { width: 1216, height: 832 },
@@ -195,11 +195,14 @@ const generateImage = async (prompt, aspectRatio, accessToken, styleImageId = nu
       styles: {
         presets: ['photo'],
       },
+      structure: {
+        strength: 100,
+      },
       contentClass: 'photo',
     };
 
     if (styleImageId) {
-      payload.styles.imageReference = {
+      payload.structure.imageReference = {
         source: {
           uploadId: styleImageId
         }
@@ -217,7 +220,7 @@ const generateImage = async (prompt, aspectRatio, accessToken, styleImageId = nu
     };
 
     log(`Generating image with aspect ratio ${aspectRatio}...`);
-    const response = await axios.post('https://firefly-api.adobe.io/v2/images/generate', payload, requestConfig);
+    const response = await axios.post('https://firefly-api.adobe.io/v3/images/generate', payload, requestConfig);
 
     if (!response.data) {
       throw new Error('No response data received from Firefly API.');
@@ -228,7 +231,7 @@ const generateImage = async (prompt, aspectRatio, accessToken, styleImageId = nu
     }
 
     const imageOutput = response.data.outputs[0];
-    if (!imageOutput.image || !imageOutput.image.presignedUrl) {
+    if (!imageOutput.image || !imageOutput.image.url) {
       throw new Error('Invalid image output format from Firefly API.');
     }
 
@@ -239,7 +242,7 @@ const generateImage = async (prompt, aspectRatio, accessToken, styleImageId = nu
       timeout: 60000,
     };
 
-    const imageResponse = await axios.get(imageOutput.image.presignedUrl, downloadConfig);
+    const imageResponse = await axios.get(imageOutput.image.url, downloadConfig);
 
     if (!imageResponse.data || imageResponse.data.byteLength === 0) {
       throw new Error('Downloaded image data is empty.');
